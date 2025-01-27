@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: flask-todo
+    env: python
+    buildCommand: |
+      pip install -r requirements.txt
+      flask db upgrade
+    startCommand: gunicorn wsgi:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_HOST
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: DB_PORT
+        sync: false
